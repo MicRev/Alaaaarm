@@ -32,8 +32,9 @@ const int Stop = 800; //一拍休止符的长度
 /*隐藏窗口*/
 void hideWindow() {
     std::cout << "点击此窗口..." << std::endl;
-	HWND hwnd = GetForegroundWindow();
+	HWND hwnd = NULL;
 	while (hwnd == NULL) {
+        hwnd = GetForegroundWindow();
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	}
     ShowWindow(hwnd, SW_HIDE);
