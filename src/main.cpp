@@ -15,9 +15,9 @@
 
 typedef enum{HOUR, MIN, SEC} TIME_IDX;
 const int ALARM_TIME[3] = {23, 50, 0};
-const int ALIVE_TIME = 8 * 60 * 1000;
+const int ALIVE_TIME = 5 * 60 * 1000;
 
-const char VERSION[] = "1.1.1";
+const char VERSION[] = "1.1.2";
 
 const int _oC = 277, _oD = 311, _oF = 370, _oG = 415, _oA = 466;
 const int _C = 262, _D = 294, _E = 330, _F = 349, _G = 392, _A = 440, _B = 494;
@@ -58,7 +58,7 @@ bool powerOffProc() {
 #ifdef DEBUG
     std::cout << "power off!" << std::endl;
 #else
-	if (!improvePv() || !ExitWindowsEx(EWX_POWEROFF | EWX_FORCE, SHTDN_REASON_MAJOR_APPLICATION)) return false;
+	if (!improvePv() || !InitiateSystemShutdownEx(NULL, NULL, 0, TRUE, FALSE, SHTDN_REASON_FLAG_USER_DEFINED)) return false;
 #endif
 
     return true;
